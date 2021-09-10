@@ -1,13 +1,14 @@
 import {BootMixin} from '@loopback/boot';
 import {ApplicationConfig} from '@loopback/core';
-import {
-  RestExplorerBindings,
-  RestExplorerComponent,
-} from '@loopback/rest-explorer';
 import {RepositoryMixin} from '@loopback/repository';
 import {RestApplication} from '@loopback/rest';
+import {
+  RestExplorerBindings,
+  RestExplorerComponent
+} from '@loopback/rest-explorer';
 import {ServiceMixin} from '@loopback/service-proxy';
 import path from 'path';
+import {demoMiddleware} from './middleware/log.middleware';
 import {MySequence} from './sequence';
 
 export {ApplicationConfig};
@@ -29,6 +30,7 @@ export class DemoApplication extends BootMixin(
       path: '/explorer',
     });
     this.component(RestExplorerComponent);
+    this.middleware(demoMiddleware)
 
     this.projectRoot = __dirname;
     // Customize @loopback/boot Booter Conventions here
